@@ -1,0 +1,47 @@
+{%extends "base.html"%}
+{% load humanize %}
+
+{%block brand%}
+create by django
+{%endblock%}
+
+{%block content%}
+{%autoescape off%}
+{%for article in article_list %}
+	<h3> <a href="/{{article.id}}">{{article.title}}</a> 
+        </h3>
+	    <h6> 
+            <a href="/{{article.id}}" style="text-decoration:none;"><span class="label label-danger">>查看全文</span></a>
+            <span class="label label-info"> {{article.date|naturaltime}}发布</span>
+            <span class="label label-info"> {{article.scan}} 浏览</span> &nbsp&nbsp标签:
+            {%for i in article.tag.split%}
+            <span class="label label-warning"> {{i}}</span>
+            {%endfor%}
+        
+        </h6>
+        <div class="word">
+        {{article.content|striptags|slice:"200" }}
+        </div>
+	<br/>
+{%endfor%}
+{%endautoescape%}
+<ul class="pager">
+{%if prePage%}
+<li><a href="{{prefix}}?page={{page | add:"-1"}}">上一页</a></li>
+{%endif%}
+{%if nextPage%}
+<li><a href="{{prefix}}?page={{page | add:'1'}}">下一页</a></li>
+{%endif%}
+</ul>
+{%endblock%}
+
+{%block footer%}
+<footer class="text-center">友情链接
+{%for i in link%}
+<a href="{{i.url}}">{{i.name}}的博客</a>&nbsp
+{%endfor%}
+</br>
+</br>
+</br>
+</footer>
+{%endblock%}

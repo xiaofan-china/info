@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>完整demo</title>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+
+    
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+<div class="container">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="https://www.djangoproject.com/" target="_blank">made in django</a>
+<div class="collapse  navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav ">
+<li  class="active"><a href="#">技术贴</a></li>
+<li ><a href="#">前端</a></li>
+<li ><a href="#">后端</a></li>
+<li><a href="#">生活贴</a></li>
+<li><a href="#">杂记</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+
+<form class="navbar-form navbar-right" role="search">
+   {% csrf_token %}
+  <div class="form-group">
+    <input type="text" id="tags" name="input" class="form-control" placeholder="Search...">
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+</div>
+</div>
+</nav>
+
+ <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        //这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/static/ueditor1_4_3-utf8-php/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/static/ueditor1_4_3-utf8-php/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
+
+
+</body>
+</html>

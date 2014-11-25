@@ -1,0 +1,115 @@
+{%extends "base.html"%}
+{%block link%}
+{{block.super}}
+<script src="/static/style/jquery.js"></script>
+{%endblock%} 
+
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+
+{%block subtitle%}
+                 <div class="title">主机详情</div>
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block bigright%}
+               <form name="form" class="host-details" action="{%url "web01.views.save"%}" method="POST">
+                  {%ifequal success "1" %}
+                    <div class="success">保存成功</div>
+                  {%endifequal%}
+                  {%ifequal success "2" %}
+                    <div class="unsuccess">保存失败</div>
+                  {%endifequal%}
+                  {%csrf_token%}
+                  <input type="hidden" name="dog" value="{{m.id}}"> 
+                  <div class="host-details-list">
+                     <label for="">地址：</label>
+                     <p>
+                        <input type="text" name="address" value="{{m.address}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">序列号：</label>
+                     <p>
+                        <input type="text" name="sn" value="{{m.sn}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">主机名：</label>
+                     <p>
+                        <input type="text" name="hostname" value="{{m.hostname}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">ip：</label>
+                     <p>
+                        <input type="text" name="ip" value="{{m.ip}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">远程卡ip地址：</label>
+                     <p>
+                        <input type="text" name="ilo_ip"  value="{{m.ilo_ip}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">远程卡账号：</label>
+                     <p>
+                        <input type="text" name="ilo_user" value="{{m.ilo_user}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">远程卡密码：</label>
+                     <p>
+                        <input type="text" name="ilo_passwd" value="{{m.ilo_passwd}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">cpu：</label>
+                     <p>
+                        <input type="text" name="cpu"  value="{{m.cpu}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">内存：</label>
+                     <p>
+                        <input type="text" name="memory" value="{{m.memory}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">硬盘：</label>
+                     <p>
+                        <input type="text" name="disk" value="{{m.disk}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">归属人：</label>
+                     <p>
+                        <input type="text" name="owner" value="{{m.owner}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">备注：</label>
+                     <p>
+                        <textarea name="memo" >{{m.memo}}</textarea>
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">最后修改时间：</label>
+                     <p>
+                        <input type="text" readonly value="{{m.add_time}}">
+                     </p>
+                 </div>
+                  <div class="op view-op fb tc">
+                    <a id="sub" href="javascript:void(document.form.submit())" class="add">保存</a>
+                    <a href="/" class="del">关闭</a>
+                 </div>
+             </form>
+{%endblock%}
+{%block foot%}
+{%endblock%}

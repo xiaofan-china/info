@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chars </title>
+    <link rel="stylesheet" href="/static/dist/css/bootstrap.css" />
+    
+</head>
+<body>
+<div class="container">
+    <div id="contain" style="width:600px;height:500px;"></div>
+
+</div>
+
+<script src="/static/jquery-1.11.1.min.js"></script>
+<script src="/static/dist/js/bootstrap.js"> </script>
+<script src="/static/Highcharts-4.0.1/js/highcharts.js"></script>
+<script>
+$(function(){
+    $('#contain').highcharts({
+        chart: {type:"column"},
+        title: {text:"my chart"},
+        xAxis:{categories:[1,2,3]},
+        yAxis:{title:{text:"create count"}},
+        series:[{name:'tom',data:[1,20,4000000]}]
+    });
+});
+</script>
+</body>
+</html>

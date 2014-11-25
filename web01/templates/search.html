@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%block list%}
+            <li class="active"><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+
+{%block foot%}
+         <div class="table-footer clearfix">
+              <div class="sum fl">共<span>{{count}}</span>条数据</div>
+            <div class="page fr">
+                {%if prePage%}
+                <a href='{%url "web01.views.search"%}?field={{field}}&monkey={{name}}&page={{page|add:"-1"}}'><span class="active">上一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">首页</span></a>
+                {%endif%}
+                {%if nextPage%}
+                <a href='{%url "web01.views.search"%}?field={{field}}&monkey={{name}}&page={{page|add:"1"}}' ><span class="active">下一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">末页</span></a>
+                {%endif%}
+            </div>
+            </div>
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+        </div>
+{%endblock%}

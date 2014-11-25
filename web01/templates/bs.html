@@ -1,0 +1,487 @@
+{%extends "base.html"%}
+{%block link%}
+{{block.super}}
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/static/style/jquery.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js "></script>
+
+<script >
+Array.prototype.indexOf = function(val) {            
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == val) return i;
+    }
+    return -1;
+};
+Array.prototype.remove = function(val) {
+    var index = this.indexOf(val);
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+};
+
+$(function(){
+
+    $("a[href='#every-minute']").click(function(){
+        var sum=$("#time").val();
+        var arr=sum.split(" ");
+        arr[0]="*";
+        $("#time").val(arr.join(" "));
+
+    });   
+
+    $("a[href='#every-n-minute']").click(function(){
+        var num=$("#minute").val();
+        var sum=$("#time").val();
+        var arr=sum.split(" ");
+        arr[0]="*/"+num;
+        $("#time").val(arr.join(" "));
+    });
+    
+    $("#minute").focusout(function(){
+        var num=$("#minute").val();
+        var sum=$("#time").val();
+        var arr=sum.split(" ");
+        arr[0]="*/"+num;
+        $("#time").val(arr.join(" "));
+
+    });
+
+    $("a[href='#every-select-minute']").click(function(){
+        $(".minute").removeClass("active");
+        var sum=$("#time").val();
+        var arr=sum.split(" ");
+        arr[0]="*";
+        $("#time").val(arr.join(" "));
+
+    });     
+
+
+    $(".btn-primary").click(function(){
+        var value=$(this).children().data("value");
+        if($(this).hasClass("minute")){
+            var sum=$("#time").val();
+            var arr=sum.split(" "); 
+            if(arr[0]=="*"){
+                arr[0]=value;
+            }
+            else{
+                var arr2=arr[0].split(",");
+                if ($.inArray(value.toString(),arr2)!=-1){
+                    arr2.remove(value);
+                    if (arr2.length==0){
+                        arr[0]="*";
+                    }else{
+                        arr[0]=arr2.join(",");
+                    }
+                }else{
+                    arr[0]=arr[0]+","+value
+                }
+            }
+            $("#time").val(arr.join(" "));
+        }
+    });
+});
+
+</script>
+
+<style>
+.self{
+display:none;
+}
+.panel{
+margin-bottom:2px;
+}
+.number{
+width:40px;
+height:26px;
+}
+
+.panel-title{
+color:#B9DDFF;
+}
+</style>
+{%endblock%} 
+
+{%block list%}
+            <li ><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+{%endblock%}
+
+{%block subtitle%}
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block bigright%}
+<div class="col-sm-7 col-sm-offset-2" style="background-color:white">
+<br/>
+<!-----------minute----------->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#nav1" data-toggle="collapse">
+       <div class="panel-title">
+            分钟
+    
+       </div>
+        </a>
+    </div>
+
+    <div id="nav1" class="collapse in panel-body">
+        <ul  class=" nav nav-tabs">
+         <li class="active"><a href="#every-minute" data-toggle="tab">每分钟</a></li>
+         <li><a href="#every-n-minute" data-toggle="tab">每N分钟</a></li>
+         <li><a href="#every-select-minute" data-toggle="tab">每选择的分钟</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="every-minute"" class="panel  panel-default self fade in active"> 
+            <div class="panel-body">    
+                 程序将在每分钟执行
+            </div>
+          </div>
+          <div id="every-n-minute" class="panel panel-default self fade "> 
+            <div class="panel-body">   
+                 程序将要每
+                 <input id="minute"  class="number" type="text" value=5 />
+                 分钟运行
+            </div>
+          </div>
+          <div id="every-select-minute" class="panel panel-default self fade "> 
+            <div class="panel-body">   
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="0">00</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="1">01</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="2">02</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="3">03</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="4">04</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="5">05</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="6">06</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="7">07</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="8">08</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="9">09</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="10">10</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="11">11</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="12">12</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="13">13</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="14">14</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="15">15</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="16">16</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="17">17</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="18">18</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="19">19</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="20">20</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="21">21</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="22">22</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="23">23</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="24">24</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="25">25</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="26">26</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="27">27</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="28">28</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="29">29</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="30">30</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="31">31</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="32">32</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="33">33</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="34">34</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="35">35</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="36">36</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="37">37</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="38">38</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="39">39</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="40">40</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="41">41</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="42">42</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="43">43</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="44">44</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="45">45</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="46">46</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="47">47</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="48">48</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="49">49</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="50">50</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="51">51</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="52">52</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="53">53</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="54">54</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="55">55</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="56">56</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="57">57</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="58">58</label>
+                  <label class="btn btn-primary minute"><input type="checkbox" data-value="59">59</label>
+              </div>
+            </div>
+
+          </div>
+         </div>
+    </div>
+  </div>
+<!-----------hours----------->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#nav2" data-toggle="collapse">
+             <div class="panel-title">
+                小时
+             </div>
+        </a>
+    </div>
+
+    <div id="nav2" class="collapse  panel-body">
+        <ul  class=" nav nav-tabs">
+         <li class="active"><a href="#every-hour" data-toggle="tab">每小时</a></li>
+         <li><a href="#every-n-hour" data-toggle="tab">每N小时</a></li>
+         <li><a href="#every-select-hour" data-toggle="tab">每选择的小时</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="every-hour" class="panel  panel-default self fade in active"> 
+            <div class="panel-body">    
+                程序将每小时执行           
+            </div>
+          </div>
+          <div id="every-n-hour" class="panel panel-default self fade "> 
+            <div class="panel-body"> 
+                 程序将要每
+                  <input id="hour" class="number" type="text" value=2 />
+                 小时运行 
+             
+            </div>
+           </div>
+           <div id="every-select-hour" class="panel panel-default self fade "> 
+            <div class="panel-body">  
+                   
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="0">00</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="1">01</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="2">02</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="3">03</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="4">04</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="5">05</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="6">06</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="7">07</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="8">08</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="9">09</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="10">10</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="11">11</label>
+                  </div>
+
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="12">12</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="13">13</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="14">14</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="15">15</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="16">16</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="17">17</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="18">18</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="19">19</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="20">20</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="21">21</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="22">22</label>
+                  <label class="btn btn-primary hour"><input type="checkbox" data-value="23">23</label>
+                  </div>
+            </div>
+
+           </div>
+        </div>
+    </div>
+  </div>
+<!-----------day----------->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#nav3" data-toggle="collapse">
+            <div class="panel-title">
+                日
+            </div>
+        </a>
+    </div>
+
+    <div id="nav3" class="collapse  panel-body">
+        <ul  class=" nav nav-tabs">
+         <li class="active"><a href="#every-day" data-toggle="tab">每天</a></li>
+         <li><a href="#every-select-day" data-toggle="tab">每选择的天</a></li>
+        </ul>
+        <div class="tab-content">
+           <div id="every-day" class="panel  panel-default self fade in active"> 
+               <div class="panel-body">    
+                程序将每天执行
+               </div>
+           </div>
+              <div id="every-select-day" class="panel panel-default self fade "> 
+                 <div class="panel-body">   
+                      <div class="btn-group clearfix" data-toggle="buttons">
+                      <label class="btn btn-primary day "><input type="checkbox" data-value="1">01</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="2">02</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="3">03</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="4">04</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="5">05</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="6">06</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="7">07</label>
+                      </div>
+
+                      <div class="btn-group clearfix" data-toggle="buttons">
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="8">08</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="9">09</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="10">10</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="11">11</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="12">12</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="13">13</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="14">14</label>
+                      </div>
+
+                      <div class="btn-group clearfix" data-toggle="buttons">
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="15">15</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="16">16</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="17">17</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="18">18</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="19">19</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="20">20</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="21">21</label>
+                      </div>
+
+                      <div class="btn-group clearfix" data-toggle="buttons">
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="22">22</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="23">23</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="24">24</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="25">25</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="26">26</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="27">27</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="28">28</label>
+                      </div>
+
+                      <div class="btn-group clearfix" data-toggle="buttons">
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="29">29</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="30">30</label>
+                      <label class="btn btn-primary day"><input type="checkbox" data-value="31">31</label>
+                      </div>
+                 </div>
+                
+              </div>
+        </div>
+    </div>
+  </div>
+
+<!-----------month----------->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#nav4" data-toggle="collapse">
+             <div class="panel-title">
+             月
+             </div>
+        </a>
+    </div>
+
+    <div id="nav4" class="collapse  panel-body">
+        <ul  class=" nav nav-tabs">
+         <li class="active"><a href="#every-month" data-toggle="tab">每月</a></li>
+         <li><a href="#every-select-month" data-toggle="tab">每选择的月</a></li>
+        </ul>
+        <div class="tab-content">
+         <div id="every-month" class="panel  panel-default self fade in active"> 
+            <div class="panel-body">    
+                程序将每月执行
+            </div>
+         </div>
+         <div id="every-select-month" class="panel panel-default self fade "> 
+            <div class="panel-body">   
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="1">Jan</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="2">Feb</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="3">Mar</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="4">Apr</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="5">May</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="6">Jun</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="7">Jul</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="8">Aug</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="9">Sep</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="10">Oct</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="11">Nov</label>
+                  <label class="btn btn-primary month"><input type="checkbox" data-value="12">Dec</label>
+                  </div>                    
+            </div>
+         </div>
+
+        </div>
+    </div>
+  </div>
+
+<!-----------week----------->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#nav5" data-toggle="collapse">
+            <div class="panel-title">
+                周
+            </div>
+        </a>
+    </div>
+
+    <div id="nav5" class="collapse  panel-body">
+        <ul  class=" nav nav-tabs">
+         <li class="active"><a href="#every-day-week" data-toggle="tab">一周的每天</a></li>
+         <li><a href="#every-select-day-week" data-toggle="tab">一周的每选择的天</a></li>
+        </ul>
+        <div class="tab-content">
+         <div id="first" class="panel  panel-default self fade in active"> 
+            <div class="panel-body">    
+                程序将一周的每一天执行
+            </div>
+         </div>
+         <div id="every-select-day-week" class="panel panel-default self fade "> 
+            <div class="panel-body">   
+                  <div class="btn-group clearfix" data-toggle="buttons">
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="0">Sun</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="1">Mon</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="2">Tue</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="3">Wed</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="4">Thu</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="5">Fri</label>
+                  <label class="btn btn-primary week"><input type="checkbox" data-value="6">Sat</label>
+                  </div>
+            </div>
+         </div>
+
+        </div>
+    </div>
+  </div>
+<hr>
+<form class="form-horizontal">
+ <div class="form-group">
+     <label class="col-sm-2 control-label"> 执行时间</label>
+     <div class="col-sm-10">
+       <input class="form-control" type="text" readonly name="time" id="time" value="* * * * *">
+     </div>
+ </div>
+ <div class="form-group">
+     <label class="col-sm-2 control-label"> 执行命令</label>
+     <div class="col-sm-10">
+       <input class="form-control" type="text" value="/apps/product/php/bin/php" name="command" id="time">
+     </div>
+ </div>
+
+ <div class="form-group">
+     <label class="col-sm-2 control-label"> </label>
+     <div class="col-sm-10">
+        <button class="btn btn-success" type="submit">提交</button>
+        <button class="btn btn-danger" type="buttion">取消</button>
+     </div>
+ </div>
+</form>
+
+</div>
+
+
+{%endblock%}
+{%block foot%}
+{%endblock%}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script type="text/javascript" src="/static/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var n=0;
+	function run(){
+		$("td").css("background-color","white");
+		$(arr[n]).css("background-color","red");
+		if(n<arr.length-1){
+			n++;
+		}else{
+			n=0;
+		}
+		
+	}
+	var arr=$("td");
+	var interval=setInterval(run,"500");
+	$("input[type='button']").click(function(){
+		alert($("input[type='text']").val());
+	
+	});	
+
+
+});
+
+</script>
+<style>
+table{
+border-collapse:collapse;
+
+}
+td{
+width:100px;
+height:30px;
+border:1px solid #B1CDE3;
+text-align:center;
+}
+</style>
+<body>
+<table name="table"  title="hi">
+<tr><td>1</td></tr>
+<tr><td>2</td></tr>
+<tr><td>3</td></tr>
+<tr><td>4</td></tr>
+</table>
+<input type="text" value="some"> </input>
+<input type="button" value="submit"> </input>
+</body>
+
+</html>

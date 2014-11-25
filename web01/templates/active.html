@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>add party</title>
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3RgOamiVeZZQGv4iPZGkc1iw"> </script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script src="/static/html2canvas-master/build/html2canvas.min.js "></script>
+</head>
+<style>
+#mymap{
+    height:400px;
+}
+.top{
+padding-top:40px;
+}
+.input-group-addon{
+    width:40%;
+}
+.input-group .form-control{
+    width:300px;
+}
+footer{
+    clear:both;
+    height:200px;
+}
+.btn-success {
+    width:250px;
+    margin-top:50px;
+}
+</style>
+<body >
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="top"> <h1 class="text-center alert alert-success">创建新项目</h1></div>
+        <div id="mymap" ></div>
+        <div class="input-group">
+            <span class="input-group-addon">起始地</span><input class="form-control" id="start" type="text">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">目的地</span><input class="form-control" id="end" type="text">
+
+        </div>
+        <button class="btn btn-primary" id="sub">查询</button>
+        <button class="btn btn-primary" id="upload">保存</button>
+        <hr>
+        <form class="text-center">
+            <input type="hidden" id="save" name="map" value="0">
+            <div class="input-group">
+            <span class="input-group-addon">主题</span><input class="form-control " type="text"  required/>
+            </div>
+            <div class="input-group">
+            <span class="input-group-addon">开始时间</span><input class="form-control date" type="text"  required placeholder="timer"/>
+            </div>
+            <div class="input-group">
+            <span class="input-group-addon">结束时间</span><input class="form-control date2" type="text"  required placeholder="timer"/>
+            </div>
+            <div class="input-group">
+            <span class="input-group-addon">地点</span><input class="form-control " type="text"  required/>
+            </div>
+            <div class="input-group">
+            <span class="input-group-addon">人数限制/人</span><input class="form-control " type="text"   placeholder="可以不填"/>   </div>
+            <div class="input-group">
+            <span class="input-group-addon">人均费用/元</span><input class="form-control" type="text"  placeholder="可以不填"/>
+            </div>
+            <div class="input-group">
+            <span class="input-group-addon">备注</span><input class="form-control " type="text" placeholder="可以不填" />
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">活动状态</span>
+                <select class="form-control "  >
+                        <option value="0">未开始</option>
+                        <option value="1" selected="123">进行中</option>
+                        <option value="2">结束了</option>
+                </select>
+            </div>
+            <button type="submit" class="btn  btn-success">提交</button>
+        </form>
+    </div>
+    <footer></footer>
+</div>
+</body>
+</html>
+<script>
+$(document).ajaxSend(function(event, xhr, settings) {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function sameOrigin(url) {
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    function safeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+    }
+});
+
+</script>
+<script>
+    
+    var map = new BMap.Map("mymap",{minZoom:9,maxZoom:14});         
+    map.centerAndZoom(new BMap.Point(116.51512,39.997629), 13);
+    var top_left_navigation = new BMap.NavigationControl();
+    map.addControl(top_left_navigation);
+    
+    function snapshot(){
+　　　　　　html2canvas(document.body, {
+ 　　　　　　　　onrendered: function(canvas){
+                    var html_canvas = canvas.toDataURL();
+                    $.post('/upload/', {snap:html_canvas}, function(text){
+                            $("#save").val(text);
+
+                            
+                    }, 'text');
+              }
+            });
+　　}    
+
+    $(function(){
+        $("#sub").click(function(){
+            map.clearOverlays();
+            var start=$("#start").val();
+            var end=$("#end").val();
+            var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+            walking.search(start, end);
+
+        });
+        $("#upload").click(function(){
+            snapshot();
+        });
+    
+        $(".d6ate").datetimepicker({
+            format: "yyyy-mm-dd hh:ii",
+        });
+        $(".date2").datetimepicker({
+            format: "yyyy-mm-dd hh:ii",
+        });
+    });
+</script>
+

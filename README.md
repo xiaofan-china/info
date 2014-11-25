@@ -1,5 +1,4 @@
-
 info
 ====
 
-information
+info

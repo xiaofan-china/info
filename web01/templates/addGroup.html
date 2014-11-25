@@ -1,0 +1,56 @@
+{%extends "base.html"%}
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li class="active"><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+{%block subtitle%}
+         <h2 class="title">添加到组</h2>
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block bigright%}
+    <form class="add-user">
+                 <div class="add-list clearfix">
+                     <label>用户名：</label>
+                     <div class="add-right fs16">
+                        <div style="margin-top:4px">{{user}}</div>
+                    </div>
+                 </div>
+                 <div class="add-list clearfix">
+                     <label>添加到组：</label>
+                     <div class="add-right">
+                        <p class="clearfix">
+                            <input type="radio" name="pos" id="sys">
+                            <label for="sys">sys</label>
+                        </p>
+                        <p class="clearfix">
+                            <input type="radio" name="pos" id="idc">
+                            <label for="idc">idc</label>
+                        </p>
+                        <p class="clearfix">
+                            <input type="radio" name="pos" id="net">
+                            <label for="net">net</label>
+                        </p>
+                        <p class="clearfix">
+                            <input type="radio" name="pos" id="security">
+                            <label for="security">security</label>
+                        </p>
+                     </div>
+                 </div>
+                 <div class="op">
+                     <a href="" class="add">确定</a>
+                    <a href="" class="del">取消</a>
+                 </div>
+    </form> 
+
+
+
+{%endblock%}
+
+{%block foot%}
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+{%endblock%}
+

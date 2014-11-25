@@ -1,0 +1,86 @@
+<html>
+<head>
+<script type="text/javascript" src="./jquery-1.11.1.min.js">
+</script>
+<script type="text/javascript">
+$(function(){
+	$("li").click(
+		function(){
+			var a=$(this).html();
+			var d=$(this).next();
+			d.toggle(function(){		
+				$.post("ajax",{name:a},function(data){
+				
+						$.each(data,function(k,v){
+							d.append("<li>"+v+"</li>");
+				
+						});
+				
+					}
+				);
+			},function(){$(this).hide();});
+				
+			
+		}
+	);
+});
+</script>
+<style>
+
+*{
+padding:0;
+margin:0;
+font-family:arial;
+}
+hr{
+margin-top:30px;
+}
+.hidden{
+display:none;
+background-color:#1fa67a;
+}
+ul{
+list-style:none;
+line-height:24px;
+}
+#container{
+width:900px;
+margin:auto;
+margin-top:30px;
+}
+#left{
+float:left;
+width:200px;
+
+}
+#right{
+float:left;
+width:600px;
+
+}
+
+</style>
+</head>
+<body >
+<hr>
+<div id="container">
+<div id="left">
+
+<ul>
+<li >num1</li>
+<div class="hidden">112313123</div>
+<li >num2</li>
+<div class="hidden">112313123</div>
+<li >num3</li>
+<div class="hidden">112313123</div>
+<li >num4</li>
+<div class="hidden">112313123</div>
+</ul>
+
+</div>
+<div id="right">
+testssssssssssssssssssssssssssssssssssssssssssssss
+</div>
+</div>
+</body>
+</html>

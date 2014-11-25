@@ -1,0 +1,32 @@
+@charset "utf-8";
+.login{background-color:#1a8fb4;height: 300px;}
+.login-form{width: 400px;margin:200px auto 0;border:1px solid #ddd;background-color:#fff;position: relative;}
+#owl-login {width: 211px; height: 108px; background-image: url(/static/image/owl-login.png); position: absolute; top: -100px; left: 50%; margin-left: -111px;}
+#owl-login .hand{width: 34px; height: 34px; -webkit-border-radius: 40px; border-radius: 40px; background-color: #472d20; -webkit-transform: scaleY(0.6); -moz-transform: scaleY(0.6); -o-transform: scaleY(0.6); -ms-transform: scaleY(0.6); transform: scaleY(0.6); -webkit-transition: 0.3s ease-out; -moz-transition: 0.3s ease-out; -o-transition: 0.3s ease-out; -ms-transition: 0.3s ease-out; transition: 0.3s ease-out; position: absolute; left: 14px; bottom: -8px; }
+#owl-login .hand.hand-r {left: 170px;}
+#owl-login .arms{top: 58px; position: absolute; width: 100%; height: 41px; overflow: hidden; } 
+#owl-login .arms .arm{width: 40px; height: 65px; position: absolute; left: 20px; top: 40px; background-image: url(/static/image/owl-login-arm.png); -webkit-transition: 0.3s ease-out; -moz-transition: 0.3s ease-out; -o-transition: 0.3s ease-out; -ms-transition: 0.3s ease-out; transition: 0.3s ease-out; -webkit-transform: rotate(-20deg); -moz-transform: rotate(-20deg); -o-transform: rotate(-20deg); -ms-transform: rotate(-20deg); transform: rotate(-20deg);}
+#owl-login .arms .arm.arm-r{-webkit-transform: rotate(20deg) scaleX(-1); -moz-transform: rotate(20deg) scaleX(-1); -o-transform: rotate(20deg) scaleX(-1); -ms-transform: rotate(20deg) scaleX(-1); transform: rotate(20deg) scaleX(-1); left: 158px; }
+.form-control {display: block; width: 100%; height: 34px; padding: 6px 35px; font-size: 14px; line-height: 1.428571429; color: #555555; vertical-align: middle; background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+.form-control:focus {border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+.login-form .pad{overflow: hidden; padding: 30px; }
+.login-form .controls{position: relative; margin-bottom: 10px;}
+.login-form .controls em{display:inline-block;position:absolute;left:10px;top:10px;}
+.email-icon{background:url(/static/image/user_bg.jpg) no-repeat;width: 17px;height: 13px;}
+.password-icon{background:url(/static/image/pwd_bg.jpg) no-repeat;width: 14px;height: 14px;}
+.login-form .form-actions{border-top: 1px solid #e4e4e4; background-color: #f7f7f7; padding: 15px 30px; text-align: right; } .loginform .form-actions{border-top: 1px solid #e4e4e4; background-color: #f7f7f7; padding: 15px 30px; text-align: right; }
+.btn {display: inline-block; padding: 6px 12px; margin-bottom: 0;font-weight: normal; line-height: 1.428571429; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }
+.btn:focus {outline: thin dotted #333; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px; }
+.btn:hover, .btn:focus {color: #333333; text-decoration: none; }
+.btn:active, .btn.active {background-image: none; outline: 0; -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
+a.btn-link {color: #1a8fb4; } a.btn-link:hover,
+a.btn-link:active, a.btn-link:focus {color: #00789d; text-decoration: none;} 
+a.btn-link.text-muted {color: #ccc; } a.btn-link.text-muted:hover,
+a.btn-link.text-muted:active, a.btn-link.text-muted:focus {color: #1a8fb4;}
+.btn-primary {color: #ffffff; background-color: #428bca; border-color: #357ebd;}
+.pull-left{float:left;}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {color: #ffffff; background-color: #00789d; border-color:#285e8e; }
+#owl-login.password .hand{-webkit-transform: translateX(42px) translateY(-15px) scale(0.7); -moz-transform: translateX(42px) translateY(-15px) scale(0.7); -o-transform: translateX(42px) translateY(-15px) scale(0.7); -ms-transform: translateX(42px) translateY(-15px) scale(0.7); transform: translateX(42px) translateY(-15px) scale(0.7); } 
+#owl-login.password .hand.hand-r{-webkit-transform: translateX(-42px) translateY(-15px) scale(0.7); -moz-transform: translateX(-42px) translateY(-15px) scale(0.7); -o-transform: translateX(-42px) translateY(-15px) scale(0.7); -ms-transform: translateX(-42px) translateY(-15px) scale(0.7); transform: translateX(-42px) translateY(-15px) scale(0.7); } 
+#owl-login.password .arms .arm {-webkit-transform: translateY(-40px) translateX(40px); -moz-transform: translateY(-40px) translateX(40px); -o-transform: translateY(-40px) translateX(40px); -ms-transform: translateY(-40px) translateX(40px); transform: translateY(-40px) translateX(40px); }
+#owl-login.password .arms .arm.arm-r{-webkit-transform: translateY(-40px) translateX(-40px) scaleX(-1); -moz-transform: translateY(-40px) translateX(-40px) scaleX(-1); -o-transform: translateY(-40px) translateX(-40px) scaleX(-1); -ms-transform: translateY(-40px) translateX(-40px) scaleX(-1); transform: translateY(-40px) translateX(-40px) scaleX(-1); }

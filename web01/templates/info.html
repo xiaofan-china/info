@@ -1,0 +1,9 @@
+{%extends "base.html"%}
+{%block list%}
+            <li class="active"><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+

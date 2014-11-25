@@ -1,0 +1,55 @@
+{%extends "base.html"%}
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li class="active"><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+{%block subtitle%}
+         <h2 class="title">用户列表</h2>
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block nav-tag%}
+{%endblock%}
+{%block width%}
+         <ul class="table-list table-list-half">
+{%endblock%}
+{%block thead%}
+                <span style="width:33%">用户名</span>
+                <span style="width:33%">join时间</span>
+                <span style="width:33%" class="last">最后登录</span>
+{%endblock%}
+{%block tbody%}
+                {%for u in u_list%}
+             <li>
+
+                <span style="width:33%" class="fs16"><a href="{%url "web01.views.user"%}?user={{u.username}}">{{u.username}}</a></span>
+                <span style="width:33%">{{u.date_joined}}</span>
+                <span style="width:33%" class="last">{{u.last_login}}</span>
+
+            </li>
+                {%endfor%}
+{%endblock%}
+
+{%block foot%}
+         <div class="table-footer clearfix">
+              <div class="sum fl">共<span>{{count}}</span>条数据</div>
+            <div class="page fr">
+                {%if prePage%}
+                <a href='{%url "web01.views.users"%}?page={{page|add:"-1"}}'><span class="active">上一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">首页</span></a>
+                {%endif%}
+                {%if nextPage%}
+                <a href='{%url "web01.views.users"%}?page={{page|add:"1"}}' ><span class="active">下一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">末页</span></a>
+                {%endif%}
+            </div>
+            </div>
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+        </div>
+{%endblock%}
+

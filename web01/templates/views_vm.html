@@ -1,0 +1,110 @@
+{%extends "base.html"%}
+{%block link%}
+{{block.super}}
+<script src="/static/style/jquery.js"></script>
+<style>
+</style>
+{%endblock%} 
+
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+
+{%block subtitle%}
+                 <div class="title">虚机详情</div>
+{%endblock%}
+
+{%block search%}
+{%endblock%}
+
+{%block bigright%}
+            <form  name="form" class="host-details" action="{%url "web01.views.save_vm"%}" method="POST">
+                {%csrf_token%}
+                 <input type="hidden" name="cat" value="{{vm.id}}">
+                {%if father_error%}
+                 <div class="unsuccess">宿主机不存在，保存失败!</div>
+                {%endif%}
+                {%ifequal success "1" %}
+                    <div class="success">保存成功</div>
+                 {%endifequal%}
+                 {%ifequal success "2" %}
+                    <div class="unsuccess">保存失败</div>
+                 {%endifequal%}
+                 <div class="host-details-list">
+                     <label for="">宿主机：</label>
+                     <p>
+                        <input type="text" name="father_ip" value={{vm.father.ip}} >
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">地址：</label>
+                     <p>
+                        <input type="text" name="address" value="{{vm.address}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">操作系统：</label>
+                     <p>
+                        <input type="text" name="os" value="{{vm.os}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">主机名：</label>
+                     <p>
+                        <input type="text" name="hostname" value="{{vm.hostname}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">ip：</label>
+                     <p>
+                        <input type="text" name="ip" value="{{vm.ip}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">cpu：</label>
+                     <p>
+                        <input type="text" name="cpu"  value="{{vm.cpu}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">内存：</label>
+                     <p>
+                        <input type="text" name="memory" value="{{vm.memory}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">硬盘：</label>
+                     <p>
+                        <input type="text" name="disk" value="{{vm.disk}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">归属人：</label>
+                     <p>
+                        <input type="text" name="owner" value="{{vm.owner}}">
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">备注：</label>
+                     <p>
+                        <textarea name="memo" >{{vm.memo}}</textarea>
+                     </p>
+                 </div>
+                 <div class="host-details-list">
+                     <label for="">最后修改时间：</label>
+                     <p>
+                        <input type="text" readonly value="{{vm.add_time}}">
+                     </p>
+                 </div>
+                  <div class="op view-op fb tc">
+                    <a href="javascript:void(document.form.submit())" class="add">保存</a>
+                    <a href="/" class="del">关闭</a>
+                 </div>
+             </form>
+{%endblock%}
+{%block foot%}
+{%endblock%}

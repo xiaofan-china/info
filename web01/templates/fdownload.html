@@ -1,0 +1,41 @@
+{%extends "base.html"%}
+{%block link%}
+{{block.super}}
+    <link rel="shortcut icon"type="image/x-icon" href="/static/d.ico"  />
+    <script src="/static/style/jquery.js"></script>
+    {%endblock%}
+
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li ><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li class="active"><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block subtitle%}
+         <h2 class="title">批量导出</h2>
+{%endblock%}
+{%block bigright%}
+
+<div class="fs16" style="clear:both;margin-top:80px;margin-left:40px;margin-bottom:30px">
+<form action="" method="post" class="op">
+{% csrf_token %} 
+<select name="target">
+<option value="host">所有物理机信息</option>
+<option value="vm">所有虚拟机信息</option>
+</select>
+<input class="add" type="submit" value="下载"/>
+<br/>
+<br/>
+<div class="fs10">注：下载的文件gb2312编码。</div>
+</form>
+</div>
+
+
+
+
+{%endblock%}
+{%block foot%}
+{%endblock%}

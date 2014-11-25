@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>work together!   </title>
+	<link rel="shortcut icon"type="image/x-icon" href="/static/d.ico" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/style/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/style/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/style/login.css">
+    
+    <!--[if IE]>
+        <script src="/static/style/html5.js"></script>
+    <![endif]-->    
+    <script type="text/javascript">
+    window.onload=function(){
+        var oPwd=document.getElementById('password');
+        var oLogin=document.getElementById('owl-login');
+        oPwd.onfocus=function()
+        {
+            oLogin.className='password';
+        }
+        oPwd.onblur=function()
+        {
+            oLogin.className='';
+        }
+    }
+</script>
+</head>
+<body>
+<div class="wrap bg-gray">
+    <div class="login clearfix">
+        {%if next%}
+        <form action="/dologin/?next={{next}}" method="post" class="login-form">
+        {%else%}
+        <form action="/dologin/" method="post" class="login-form">
+        {%endif%}
+            {% csrf_token %}
+            <div id="owl-login">
+                <div class="hand"></div>
+                <div class="hand hand-r"></div>
+                <div class="arms">
+                    <div class="arm"></div>
+                    <div class="arm arm-r"></div>
+                </div>
+            </div>
+            <div class="pad">
+                <div class="control-group">
+                    <div class="controls">
+                        <em class="email-icon"></em>
+                        <input id="email" type="text" name="user" required placeholder="jira 用户名" tabindex="1" autofocus="autofocus" class="form-control input-medium">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <em class="password-icon"></em>
+                        <input id="password" type="password" name="passwd" required placeholder="Password" tabindex="2" class="form-control input-medium">
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" tabindex="4" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

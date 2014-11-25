@@ -1,0 +1,78 @@
+{%extends "base.html"%}
+{%block list%}
+			<li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+			<li class="active"><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+{%block subtitle%}
+         <h2 class="title">虚机列表</h2>
+{%endblock%}
+{%block search%}
+                 <header>
+            <form class="search"  method="get" action={%url "web01.views.search_vm"%}>
+            <select name="field">
+            <option value="all">all vm field</option>
+            <option value="address">归属地</option>
+            <option value="os">操作系统</option>
+            <option value="hostname">主机名</option>
+            <option value="ip">ip地址</option>
+            <option value="cpu">cpu</option>
+            <option value="memory">内存</option>
+            <option value="disk">硬盘</option>
+            <option value="owner">归属人</option>
+            <option value="memo">备注</option>
+            <option value="father">宿主机ip</option>
+            </select>
+            <input type="text" name="fish"><input  class="add" type="submit" value="查询">
+            </form>
+                 </header>
+{%endblock%}
+
+{%block thead%}
+		 		<span>宿主机ip</span>
+		 		<span>归属地</span>
+		 		<span>主机名</span>
+		 		<span>IP地址</span>
+		 		<span>cpu(核)</span>
+		 		<span>内存</span>
+		 		<span>硬盘</span>
+		 		<span >归属人</span>
+{%endblock%}
+{%block tbody%}
+            {%for vm in machines%}
+                
+            <li>
+                <span class="father1">{{vm.father.ip}}</span>
+                <span>{{vm.father.address}}</span>
+                <span>{{vm.hostname}}</span>
+                <span>{{vm.ip}}</span>
+                <span>{{vm.cpu}}</span>
+                <span>{{vm.memory}}</span>
+                <span>{{vm.disk}}</span>
+                <span >{{vm.owner}}</span>
+                <span class="last"><a href="/detail_vm?cat={{vm.id}}">查看</a><a href="">删除</a></span>
+            </li>		
+
+ 		    {%endfor%}
+{%endblock%}
+{%block foot%}
+         <div class="table-footer clearfix">
+              <div class="sum fl">共<span>{{count}}</span>条数据</div>
+            <div class="page fr">
+                {%if prePage%}
+                <a href='{%url "web01.views.search_vm"%}?field={{field}}&fish={{name}}&page={{page|add:"-1"}}'><span class="active">上一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">首页</span></a>
+                {%endif%}
+                {%if nextPage%}
+                <a href='{%url "web01.views.search_vm"%}?field={{field}}&fish={{name}}&page={{page|add:"1"}}' ><span class="active">下一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">末页</span></a>
+                {%endif%}
+            </div>
+            </div>
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+        </div>
+{%endblock%}

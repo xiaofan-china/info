@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infomation</title>
+{%block link%}
+<link rel="shortcut icon"type="image/x-icon" href="/static/d.ico"  />
+<link rel="stylesheet" type="text/css" href="/static/style/base.css">
+<link rel="stylesheet" type="text/css" href="/static/style/common.css">
+<link rel="stylesheet" type="text/css" href="/static/style/list.css">
+{%endblock%}
+<!--[if IE]>
+<script src="/static/style/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="http://scottjehl.github.io/Respond/dest/respond.src.js"></script>
+<script type="text/javascript">
+window.onload=window.onresize=function(){
+    var clientH=document.documentElement.clientHeight;
+    var oSec=document.getElementById('sec');
+    var oSideBar=document.getElementById('sideBar');
+    var h=parseInt(oSec.scrollHeight);
+    if(h<clientH)
+    {
+        oSideBar.style.height=oSec.style.height=clientH+'px';
+        return;
+    }
+    oSideBar.style.height=h+'px';
+}
+</script>
+<SCRIPT >   
+function p_del() {   
+var msg = "您真的确定要删除吗？";   
+if (confirm(msg)==true){   
+return true;   
+}else{   
+return false;   
+}   
+}   
+</SCRIPT>   
+</head>
+<body>
+<div class="wrap bg-gray">
+{%block nav%}
+	<nav class="header fs16">
+		<a href="/" class="active">首页</a>
+		<a href="http://jk.corp.ncfgroup.com/">jenkins</a>
+		<a href="http://zenoss.corp.ncfgroup.com/">zenoss</a>
+		<a href="http://gitlab.corp.ncfgroup.com/">gitlab</a>
+		<a href="" >{{user.username}}</a>
+		<a href="{%url "web01.views.logouts"%}" >注销</a>
+	</nav>
+{%endblock%}
+<div class="pr">
+	<div class="list-sideBar " id="sideBar">
+		<nav class="list-ul">
+			<li><span><em></em></span>常用功能操作</li>
+{%block list%}
+			<li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+			<li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+			<li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li ><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+		</nav>
+	</div>
+
+	<section class="list-con" id="sec">
+{%block subtitle%}
+		 <h2 class="title">主机列表</h2>
+{%endblock%}
+{%block search%}
+		 <header>
+            <form class="search" method="get" action={%url "web01.views.search"%}>
+            <select name="field">
+            <option value="all">ALL</option>
+            <option value="address">归属地</option>
+            <option value="sn">序列号</option>
+            <option value="hostname">主机名</option>
+            <option value="ip">ip地址</option>
+            <option value="ilo_ip">远程卡ip</option>
+            <option value="cpu">cpu</option>
+            <option value="memory">内存</option>
+            <option value="disk">硬盘</option>
+            <option value="owner">归属人</option>
+            <option value="memo">备注</option>
+            </select>
+		 	<input type="text" name="monkey"><input class="add" type="submit" value="查询">
+            </form>
+		 </header>
+{%endblock%}
+{%block bigright%}
+    {%block nav-tag%}
+    <div class="nav-tag">
+                 <ul class="nav-tag-list">
+                    <span class="select">公益</span>
+                    <span>科技</span>
+                    <span>出版</span>
+                    <span>娱乐</span>
+                    <span>收藏</span>
+                    <span>设计</span>
+                    <span>动漫游戏</span>
+                    <span>农业</span>
+                    <span>其他</span>
+                 </ul>
+                 <div class="nav-tag-btn">
+                     <a href="{%url "web01.views.add"%}" class="add">添加</a>
+                 </div>
+     </div>
+    {%endblock%}
+{%block width%}
+		 <ul class="table-list">
+{%endblock%}
+		 	<li>
+{%block thead%}
+		 		<span>归属地</span>
+		 		<span>序列号</span>
+		 		<span>主机名</span>
+		 		<span>IP地址</span>
+		 		<span>cpu(核)</span>
+		 		<span>内存</span>
+		 		<span>硬盘</span>
+		 		<span >归属人</span>
+		 		<span class="last"></span>
+{%endblock%}
+		 	</li>
+{%block tbody%}
+            {%for m in machines%}
+            
+            <li>
+                
+                <span>{{m.address}}</span>
+                <span>{{m.sn}}</span>
+                <span>{{m.hostname}}</span>
+                <span>{{m.ip}} </span>
+                <span>{{m.cpu}}</span>
+                <span>{{m.memory}}</span>
+                <span>{{m.disk}}</span> 
+                <span >{{m.owner}}</span>
+                <span class="last"><a href="/detail/?dog={{m.id}}">查看</a><a href="/dels?dog={{m.id}}" onclick="javascript:return p_del()">删除</a></span>
+                
+            </li>		
+
+ 		    {%endfor%}
+{%endblock%}
+         </ul>
+
+{%endblock%}
+{%block foot%}
+		 <div class="table-footer clearfix">
+		 	  <div class="sum fl">共<span>{{count}}</span>条数据</div>
+		 	<div class="page fr">
+                {%if prePage%}
+		 		<a href='{%url "web01.views.info"%}?page={{page|add:"-1"}}'><span class="active">上一页</span></a>
+                {%else%}
+		 		<a href='javascript:void(0)' disabled = 'true'><span class="active">首页</span></a>
+                {%endif%}
+                {%if nextPage%}
+		 		<a href='{%url "web01.views.info"%}?page={{page|add:"1"}}' ><span class="active">下一页</span></a>
+                {%else%}
+		 		<a href='javascript:void(0)' disabled = 'true'><span class="active">末页</span></a>
+                {%endif%}
+		 	</div>
+		    </div>
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+        </div>
+{%endblock%}
+	</section>
+</div>
+</div>
+</body>
+</html>

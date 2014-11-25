@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script type="text/javascript" src="/static/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+</script>
+<style>
+table{
+border-collapse:collapse;
+width:300px;
+margin:auto;
+}
+tr{
+width:300px;
+}
+td{
+width:300px;
+border:1px solid #B1CDE3;
+text-align:center;
+Word-break: break-all;
+}
+</style>
+<body>
+time:{{time}}
+<table name="table"  title="hi">
+{%for i in a%}
+<tr><td>{{i}}</td></tr>
+{%endfor%}
+</table>
+</body>
+
+</html>

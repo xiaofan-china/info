@@ -1,0 +1,21 @@
+{%extends "vminfo.html"%}
+
+{%block foot%}
+         <div class="table-footer clearfix">
+              <div class="sum fl">共<span>{{count}}</span>条数据</div>
+            <div class="page fr">
+                {%if prePage%}
+                <a href='{%url "web01.views.search_vm"%}?field={{field}}&fish={{name}}&page={{page|add:"-1"}}'><span class="active">上一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">首页</span></a>
+                {%endif%}
+                {%if nextPage%}
+                <a href='{%url "web01.views.search_vm"%}?field={{field}}&fish={{name}}&page={{page|add:"1"}}' ><span class="active">下一页</span></a>
+                {%else%}
+                <a href='javascript:void(0)' disabled = 'true'><span class="active">末页</span></a>
+                {%endif%}
+            </div>
+            </div>
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+        </div>
+{%endblock%}

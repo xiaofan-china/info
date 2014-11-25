@@ -1,0 +1,57 @@
+{%extends "base.html"%}
+{%block list%}
+            <li><span></span><a href="{%url "web01.views.info"%}">主机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.vminfo"%}">虚机列表</a></li>
+            <li><span></span><a href="{%url "web01.views.fupload"%}">批量导入</a></li>
+            <li ><span></span><a href="{%url "web01.views.fdownload"%}">批量导出</a></li>
+            <li class="active"><span></span><a href="{%url "web01.views.users"%}">用户信息</a></li>
+{%endblock%}
+{%block subtitle%}
+         <h2 class="title">添加到组</h2>
+{%endblock%}
+{%block search%}
+{%endblock%}
+{%block bigright%}
+    <form class="add-user" action="" method="post">
+                <input type="hidden" name="user" value="{{u.username}}" />
+                {%csrf_token%} 
+                 <div class="add-list clearfix">
+                    {%if success%}
+                    <div class="success">保存成功</div>
+                    {%endif%}
+                     <label>用户名：</label>
+                     <div class="add-right fs16">
+                        <div style="margin-top:4px">{{u}}</div>
+                    </div>
+                 </div>
+                 <div class="add-list clearfix">
+                     <label>所属组：</label>
+                     <div class="add-right">
+                        {%for group in groups%}
+                        <p class="clearfix">
+                            {%if group in u.groups.all%}
+                           <input type="checkbox" name=groups id="{{group.name}}" value={{group.name}} checked/> <label for="{{group.name}}"> {{group.name}} </label>
+                            {%else%}
+                           <input type="checkbox" name=groups id="{{group.name}}" value={{group.name}} /> <label for="{{group.name}}"> {{group.name}} </label>
+                
+                            {%endif%}
+                        </p>
+                        {%endfor%}
+                     </div>
+                 </div>
+                <div class="add-list clearfix">
+                    <label>保存选项：</label>
+                    <div class="op"> 
+                     <input type="submit" class="add" value="保存"/>
+                    </div>
+                 </div>
+    </form> 
+
+
+
+{%endblock%}
+
+{%block foot%}
+            <div class="browser-support">↓↓↓↓请使用高版本浏览器 [ IE支持IE8以上 ]</div>
+{%endblock%}
+

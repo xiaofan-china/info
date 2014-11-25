@@ -1,0 +1,27 @@
+@charset "utf-8";
+*{margin:0;padding:0;box-sizing:border-box;}
+a{text-decoration:none;color:#333;}
+ul,li{list-style:none;}
+body{font:12px/1 "微软雅黑";}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-style:normal;}
+::-webkit-input-placeholder{color:#999;}
+em{font-style:normal;}
+/*浮动设置*/
+.fl{float:left;}
+.fr{float:right;}
+/*字号设置*/
+.fs10{font-size: 10px;}
+.fs14{font-size: 14px;}
+.fs16{font-size: 16px;}
+/*定位*/
+.pr{position:relative;}
+/*加粗*/
+.fb{font-weight:bold;}
+/*字色*/
+.gray{color:#999;}
+.green{color:#1fa67a;}
+.red{color:#e00;}
+/*清浮动*/
+.clearfix:after,.clearfix:before{display:table;content:'';}
+.clearfix:after{clear:both;display:block;}
+.clearfix{*zoom:1;}
